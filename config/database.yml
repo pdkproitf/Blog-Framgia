@@ -13,8 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: root
-  password: pdkpro
   host: localhost
 
 development:
@@ -44,11 +42,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: Blog_production
-  username: Blog
-  password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: Blog_production
+#   username: Blog
+#   password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
