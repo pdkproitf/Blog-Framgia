@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get 'static_pages/contact'
 
   resources :users
+  resources :sessions
 end
