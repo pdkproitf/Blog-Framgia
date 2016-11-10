@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:edit, :update]
+  before_action :logged_in_user,  only: [:edit, :update]
+  before_action :correct_user,    only: [:edit, :update]
+  before_action :find_user,       only: [:edit, :update]
+
 
   def show
     @user = User.find(params[:id])
@@ -39,5 +42,19 @@ class UsersController < ApplicationController
 
     def find_user
       @user = User.find(params[:id])
+    end
+
+    # Confirm logged-in user
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in."
+        redirect_to login_url
+      end
+    end
+
+    #  Confirm the correct user
+    def correct_user
+      find_user
+      redirect_to(root_url) unless current_user?(@user)
     end
 end
