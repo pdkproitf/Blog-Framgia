@@ -21,11 +21,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
-
+    if @user.update_attributes(user_params)
+      flash[:success] = "Update success profile"
+      redirect_to @user
+    else
+      render 'edit'
+    end
   end
 
   private
