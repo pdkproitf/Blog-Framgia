@@ -71,11 +71,6 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < EXPIRE.ago
   end
-
-  def self.EXPIRE
-    EXPIRE
-  end
-
   private
     # Converts email to all lower-case
     def downcase_email
