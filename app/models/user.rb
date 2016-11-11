@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  EXPIRE = 2.hours
 
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, :reset_token
 
   validates :name,  length: {minimum: 6}
   validates :email, presence: true, length: {maximum: 255},
@@ -46,12 +47,33 @@ class User < ApplicationRecord
   # Activates an account.
   def activate
     update_attribute(:activated,    true)
-    update_attribute(:activated_at, Time.zone.now)
+    update_attribute(:activated_at, Time.now)
   end
 
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  # Sets the password reset attribute
+  def create_reset_digest
+    self.reset_token = User.new_token
+    update_attribute(:reset_digest, User.digest(reset_token))
+    update_attribute(:reset_sent_at, Time.now)
+  end
+
+  # Send password reset email
+  def send_password_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
+  # Return true if a password reset has expired
+  def password_reset_expired?
+    reset_sent_at < EXPIRE.ago
+  end
+
+  def self.EXPIRE
+    EXPIRE
   end
 
   private
