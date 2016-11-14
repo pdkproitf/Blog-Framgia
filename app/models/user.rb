@@ -73,6 +73,13 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < EXPIRE.ago
   end
+
+  # Defines a proto-feed
+  # See "following users" for the fill implementation
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
   private
     # Converts email to all lower-case
     def downcase_email
