@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token, :activation_token, :reset_token
 
+  has_many :microposts, dependent: :destroy
+
   validates :name,  length: {minimum: 6}
   validates :email, presence: true, length: {maximum: 255},
   format: {with: VALID_EMAIL_REGEX},
@@ -71,6 +73,13 @@ class User < ApplicationRecord
   def password_reset_expired?
     reset_sent_at < EXPIRE.ago
   end
+
+  # Defines a proto-feed
+  # See "following users" for the fill implementation
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
   private
     # Converts email to all lower-case
     def downcase_email

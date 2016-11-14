@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 #  Use for encode password
@@ -7,6 +6,11 @@ gem 'bcrypt'
 gem 'faker',          '1.6.6'
 gem 'will_paginate',           '3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
+# Using for upload
+gem 'carrierwave',             '0.11.2'
+gem 'mini_magick',             '4.5.1'
+gem 'fog',                     '1.38.0'
+
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
