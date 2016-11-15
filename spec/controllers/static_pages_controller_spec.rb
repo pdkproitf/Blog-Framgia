@@ -10,6 +10,14 @@ RSpec.describe StaticPagesController, type: :controller do
     it  "renders the home template" do
       expect(response).to render_template("home")
     end
+
+    it "responds to html by default" do
+      expect(response.content_type).to eq "text/html"
+    end
+
+    it "has a 200 status code" do
+      expect(response.status).to eq(200)
+    end
   end
 
   describe  "GET about"  do
