@@ -95,7 +95,7 @@ class User < ApplicationRecord
 
   # => Unfollows a user
   def unfollow other_user
-    active_relationships.create(followed_id: other_user.id).destroy
+    active_relationships.find_by(followed_id: other_user.id).destroy
   end
 
   # => Return truw if the current user is following the other user
