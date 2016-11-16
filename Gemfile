@@ -45,6 +45,9 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'  # Using for clear database after test
+  gem 'selenium-webdriver'  #Using for run cucumber with java scrip
 end
 
 group :development do
