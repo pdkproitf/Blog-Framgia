@@ -63,5 +63,24 @@ RSpec.describe User, type: :model do
       user.save
       is_expected.to have_at_least(1).error_on(:email)
     end
+
+    it "email address should be saved as lower-case" do
+      subject.email = user.email.upcase
+      user.email.downcase
+      user.save
+      is_expected.to have_at_least(1).errors_on(:email)
+    end
+  end
+
+  describe  "test password" do
+    it "password should be present (not blak)" do
+      subject.password = subject.password_confirmation = " " * 6
+      is_expected.to  have_at_least(1).error_on(:password)
+    end
+
+    it "password should have a minimum length" do
+      subject.password = subject.password_confirmation = "a" * 5
+      is_expected.to  have_at_least(1).errors_on(:password)
+    end
   end
 end
