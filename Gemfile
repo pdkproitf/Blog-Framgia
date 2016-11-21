@@ -43,6 +43,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'rspec-rails'
   gem 'rspec-collection_matchers'
   gem 'rails-controller-testing'
