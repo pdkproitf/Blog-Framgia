@@ -15,7 +15,7 @@ gem 'fog',                     '1.38.0'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
-gem 'pry-rails'
+gem 'pry-byebug'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -43,8 +43,13 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'guard-rspec'
+  gem 'guard-cucumber'
   gem 'rspec-rails'
+  gem 'rspec-collection_matchers'
   gem 'rails-controller-testing'
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'  # Using for clear database after test
+  gem 'selenium-webdriver'  #Using for run cucumber with java scrip
 end
 
 group :development do
